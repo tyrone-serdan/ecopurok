@@ -98,7 +98,8 @@ export const MAP_CONFIG = {
   zoomLevel: 15,
 };
 
-// Mock route with coordinates around Brgy. Obrero, Butuan City
+// Mock route with coordinates encircling the center point
+// Center: 8.962216, 125.535944 | Radius: ~0.002 degrees (~200m)
 export const MOCK_ROUTE: Route = {
   id: "route-1",
   name: "Tuesday Route - Purok 1-3",
@@ -106,18 +107,20 @@ export const MOCK_ROUTE: Route = {
   totalStops: 12,
   completedStops: 4,
   stops: [
-    { id: "s1", purok: "Purok 1", address: "123 Centro St", latitude: 8.9628, longitude: 125.5365, status: "completed", wasteType: "biodegradable" },
-    { id: "s2", purok: "Purok 1", address: "125 Centro St", latitude: 8.9623, longitude: 125.5360, status: "completed", wasteType: "biodegradable" },
-    { id: "s3", purok: "Purok 1", address: "127 Centro St", latitude: 8.9618, longitude: 125.5355, status: "completed", wasteType: "biodegradable" },
-    { id: "s4", purok: "Purok 1", address: "129 Centro St", latitude: 8.9613, longitude: 125.5350, status: "completed", wasteType: "biodegradable" },
-    { id: "s5", purok: "Purok 2", address: "200 Upper St", latitude: 8.9608, longitude: 125.5345, status: "pending", wasteType: "non-biodegradable" },
-    { id: "s6", purok: "Purok 2", address: "202 Upper St", latitude: 8.9603, longitude: 125.5340, status: "pending", wasteType: "non-biodegradable" },
-    { id: "s7", purok: "Purok 2", address: "204 Upper St", latitude: 8.9598, longitude: 125.5335, status: "pending", wasteType: "recyclables" },
-    { id: "s8", purok: "Purok 3", address: "300 Lower St", latitude: 8.9593, longitude: 125.5330, status: "pending", wasteType: "recyclables" },
-    { id: "s9", purok: "Purok 3", address: "302 Lower St", latitude: 8.9588, longitude: 125.5325, status: "pending" },
-    { id: "s10", purok: "Purok 3", address: "304 Lower St", latitude: 8.9583, longitude: 125.5320, status: "pending" },
-    { id: "s11", purok: "Purok 3", address: "306 Lower St", latitude: 8.9578, longitude: 125.5315, status: "pending" },
-    { id: "s12", purok: "Purok 3", address: "308 Lower St", latitude: 8.9573, longitude: 125.5310, status: "pending" },
+    // Completed stops - encircling center
+    { id: "s1", purok: "Purok 1", address: "123 Centro St", latitude: 8.962216 + 0.0020, longitude: 125.535944, status: "completed", wasteType: "biodegradable" },
+    { id: "s2", purok: "Purok 1", address: "125 Centro St", latitude: 8.962216 + 0.0014, longitude: 125.535944 + 0.0014, status: "completed", wasteType: "biodegradable" },
+    { id: "s3", purok: "Purok 1", address: "127 Centro St", latitude: 8.962216, longitude: 125.535944 + 0.0020, status: "completed", wasteType: "biodegradable" },
+    { id: "s4", purok: "Purok 1", address: "129 Centro St", latitude: 8.962216 - 0.0014, longitude: 125.535944 + 0.0014, status: "completed", wasteType: "biodegradable" },
+    // Pending stops - continuing the circle
+    { id: "s5", purok: "Purok 2", address: "200 Upper St", latitude: 8.962216 - 0.0020, longitude: 125.535944, status: "pending", wasteType: "non-biodegradable" },
+    { id: "s6", purok: "Purok 2", address: "202 Upper St", latitude: 8.962216 - 0.0014, longitude: 125.535944 - 0.0014, status: "pending", wasteType: "non-biodegradable" },
+    { id: "s7", purok: "Purok 2", address: "204 Upper St", latitude: 8.962216, longitude: 125.535944 - 0.0020, status: "pending", wasteType: "recyclables" },
+    { id: "s8", purok: "Purok 3", address: "300 Lower St", latitude: 8.962216 + 0.0014, longitude: 125.535944 - 0.0014, status: "pending", wasteType: "recyclables" },
+    { id: "s9", purok: "Purok 3", address: "302 Lower St", latitude: 8.962216 + 0.0025, longitude: 125.535944 - 0.0010, status: "pending" },
+    { id: "s10", purok: "Purok 3", address: "304 Lower St", latitude: 8.962216 + 0.0025, longitude: 125.535944 + 0.0010, status: "pending" },
+    { id: "s11", purok: "Purok 3", address: "306 Lower St", latitude: 8.962216 - 0.0025, longitude: 125.535944 - 0.0010, status: "pending" },
+    { id: "s12", purok: "Purok 3", address: "308 Lower St", latitude: 8.962216 - 0.0025, longitude: 125.535944 + 0.0010, status: "pending" },
   ],
 };
 
