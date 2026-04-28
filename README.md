@@ -98,16 +98,3 @@ basurasmart/
     ├── styles.ts        # Shared styles
     └── types.ts         # TypeScript types
 ```
-
-## Roadmap
-
-- [ ] Connect to real backend API
-- [ ] Implement push notifications for reminders
-- [ ] Add GPS tracking for collectors
-- [ ] Include image upload for waste reports
-- [ ] Add admin dashboard for waste management staff
-- [ ] Implement data analytics and reporting
-
-## License
-
-Private - All rights reserved
