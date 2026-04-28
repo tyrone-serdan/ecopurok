@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "EcoPurok",
+    "slug": "ecopurok",
+    "version": "1.0.0",
+    "scheme": "ecopurok",
+    "platforms": ["ios", "android"],
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#ecfdf5"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ecopurok.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ecfdf5"
+      },
+      "package": "com.ecopurok.app"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
