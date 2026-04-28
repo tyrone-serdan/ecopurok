@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "EcoPurok",
-    "slug": "ecopurok",
+    "name": "BasuraSmart",
+    "slug": "basurasmart",
     "version": "1.0.0",
-    "scheme": "ecopurok",
+    "scheme": "basurasmart",
     "platforms": ["ios", "android"],
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -13,13 +13,13 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ecopurok.app"
+      "bundleIdentifier": "com.basurasmart.app"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#ecfdf5"
       },
-      "package": "com.ecopurok.app"
+      "package": "com.basurasmart.app"
     },
     "plugins": [
       "expo-router"

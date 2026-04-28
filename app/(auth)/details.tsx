@@ -51,7 +51,7 @@ export default function DetailsScreen(): JSX.Element {
     login({
       id: "demo-user",
       name: "Demo User",
-      email: "demo@ecopurok.com",
+      email: "demo@basurasmart.com",
       phone: "09*********",
       purok: purok || "Purok 1 - Centro",
       userType: (userType as UserType) || "resident",

@@ -20,7 +20,7 @@ const MOCK_USERS: Record<string, { password: string; user: User }> = {
     user: {
       id: "2",
       name: "Pedro Collector",
-      email: "pedro@ecopurok.com",
+      email: "pedro@basurasmart.com",
       phone: "09987654321",
       purok: "Purok 1 - Centro",
       userType: "collector",
