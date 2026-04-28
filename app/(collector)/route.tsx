@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView, Alert, StyleSheet, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MapRoute } from "@/components/illustrations";
+import { RouteMap } from "@/components/map";
 import { Header, Card, Button, SideMenu } from "@/components/ui";
 import { useAppStore, useAuthStore } from "@/lib/store";
 import { api } from "@/lib/api";
@@ -51,7 +51,10 @@ export default function CollectorRouteScreen(): JSX.Element {
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.mapContainer}>
-          <MapRoute width={SCREEN_WIDTH - 32} height={350} />
+          <RouteMap
+            stops={currentRoute?.stops}
+            height={350}
+          />
           
           <View style={styles.progressContainer}>
             <View style={styles.progressDot} />
@@ -65,42 +68,48 @@ export default function CollectorRouteScreen(): JSX.Element {
           {pendingStops.length > 0 && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Pending Stops ({pendingStops.length})</Text>
-              {pendingStops.map((stop) => (
-                <Card key={stop.id} variant="elevated" style={styles.stopCard} onPress={() => handleStopComplete(stop.id)}>
-                  <View style={styles.stopContent}>
-                    <View style={styles.stopNumber}>
-                      <Text style={styles.stopNumberText}>{(currentRoute?.stops.indexOf(stop) ?? 0) + 1}</Text>
+              {pendingStops.map((stop, index) => {
+                const originalIndex = currentRoute?.stops.findIndex(s => s.id === stop.id) ?? 0;
+                return (
+                  <Card key={stop.id} variant="elevated" style={styles.stopCard} onPress={() => handleStopComplete(stop.id)}>
+                    <View style={styles.stopContent}>
+                      <View style={styles.stopNumber}>
+                        <Text style={styles.stopNumberText}>{originalIndex + 1}</Text>
+                      </View>
+                      <View style={styles.stopInfo}>
+                        <Text style={styles.stopPurok}>{stop.purok}</Text>
+                        <Text style={styles.stopAddress}>{stop.address}</Text>
+                        {stop.wasteType && <Text style={styles.stopWaste}>{getWasteTypeLabel(stop.wasteType)}</Text>}
+                      </View>
+                      <TouchableOpacity onPress={() => handleStopComplete(stop.id)} style={styles.doneButton}>
+                        <Text style={styles.doneButtonText}>Done</Text>
+                      </TouchableOpacity>
                     </View>
-                    <View style={styles.stopInfo}>
-                      <Text style={styles.stopPurok}>{stop.purok}</Text>
-                      <Text style={styles.stopAddress}>{stop.address}</Text>
-                      {stop.wasteType && <Text style={styles.stopWaste}>{getWasteTypeLabel(stop.wasteType)}</Text>}
-                    </View>
-                    <TouchableOpacity onPress={() => handleStopComplete(stop.id)} style={styles.doneButton}>
-                      <Text style={styles.doneButtonText}>Done</Text>
-                    </TouchableOpacity>
-                  </View>
-                </Card>
-              ))}
+                  </Card>
+                );
+              })}
             </View>
           )}
 
           {completedStops.length > 0 && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Completed ({completedStops.length})</Text>
-              {completedStops.map((stop) => (
-                <Card key={stop.id} variant="outlined" style={[styles.stopCard, styles.completedCard]}>
-                  <View style={styles.stopContent}>
-                    <View style={[styles.stopNumber, styles.completedNumber]}>
-                      <Text style={styles.completedCheck}>✓</Text>
+              {completedStops.map((stop) => {
+                const originalIndex = currentRoute?.stops.findIndex(s => s.id === stop.id) ?? 0;
+                return (
+                  <Card key={stop.id} variant="outlined" style={[styles.stopCard, styles.completedCard]}>
+                    <View style={styles.stopContent}>
+                      <View style={[styles.stopNumber, styles.completedNumber]}>
+                        <Text style={styles.completedCheck}>✓</Text>
+                      </View>
+                      <View style={styles.stopInfo}>
+                        <Text style={[styles.stopPurok, styles.completedText]}>{stop.purok}</Text>
+                        <Text style={styles.stopAddress}>{stop.address}</Text>
+                      </View>
                     </View>
-                    <View style={styles.stopInfo}>
-                      <Text style={[styles.stopPurok, styles.completedText]}>{stop.purok}</Text>
-                      <Text style={styles.stopAddress}>{stop.address}</Text>
-                    </View>
-                  </View>
-                </Card>
-              ))}
+                  </Card>
+                );
+              })}
             </View>
           )}
 
@@ -125,8 +134,8 @@ export default function CollectorRouteScreen(): JSX.Element {
 
 const styles = StyleSheet.create({
   scrollView: { flex: 1 },
-  mapContainer: { backgroundColor: COLORS.blue[100], alignItems: "center", paddingVertical: 16 },
-  progressContainer: { marginTop: 16, backgroundColor: COLORS.white, borderRadius: 12, paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center", gap: 12 },
+  mapContainer: { backgroundColor: "#dbeafe", alignItems: "center", paddingVertical: 16 },
+  progressContainer: { marginTop: 16, backgroundColor: "#ffffff", borderRadius: 12, paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center", gap: 12 },
   progressDot: { width: 12, height: 12, borderRadius: 6, backgroundColor: COLORS.primary[500] },
   progressText: { color: COLORS.primary[700], fontSize: 14, fontWeight: "500" },
   stopsContainer: { padding: 16, paddingBottom: 32 },
