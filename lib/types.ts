@@ -149,3 +149,16 @@ export interface Announcement {
   type: AnnouncementType;
   createdAt: string;
 }
+
+export type CollectorIssueType = "road_blockage" | "no_access" | "missed_stop" | "unsafe_area" | "other";
+
+export interface CollectorIssue {
+  id: string;
+  purok: string;
+  issueType: CollectorIssueType;
+  description: string;
+  photoUri?: string;
+  latitude?: number;
+  longitude?: number;
+  createdAt: string;
+}

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { User, AuthState, Route, CalendarDay, PickupSchedule, Report, ReportStatus, PointsTransaction, Reward, Announcement } from "./types";
+import type { User, AuthState, Route, CalendarDay, PickupSchedule, Report, ReportStatus, PointsTransaction, Reward, Announcement, CollectorIssue } from "./types";
 import { MOCK_ROUTE, MOCK_PICKUP_SCHEDULE, REWARDS, MOCK_ANNOUNCEMENTS } from "./constants";
 
 interface AuthStore extends AuthState {
@@ -38,6 +38,9 @@ reports: Report[];
   addReport: (report: Report) => void;
   updateReportStatus: (reportId: string, status: ReportStatus) => void;
   setReports: (reports: Report[]) => void;
+
+  collectorIssues: CollectorIssue[];
+  addCollectorIssue: (issue: CollectorIssue) => void;
 
   latestAnnouncement: Announcement | null;
   dismissAnnouncement: () => void;
@@ -217,6 +220,12 @@ export const useAppStore = create<AppStore>((set, get) => ({
       ),
     })),
   setReports: (reports: Report[]) => set({ reports }),
+
+  collectorIssues: [],
+  addCollectorIssue: (issue: CollectorIssue) =>
+    set((state) => ({
+      collectorIssues: [issue, ...state.collectorIssues],
+    })),
 
   latestAnnouncement: MOCK_ANNOUNCEMENTS[0] || null,
   dismissAnnouncement: () => set({ latestAnnouncement: null }),

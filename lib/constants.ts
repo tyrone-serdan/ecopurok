@@ -1,4 +1,4 @@
-import type { Route, Reminder, PickupSchedule, WasteType, Reward, Announcement } from "./types";
+import type { Route, Reminder, PickupSchedule, WasteType, Reward, Announcement, CollectorIssueType } from "./types";
 
 export const COLORS = {
   primary: {
@@ -157,6 +157,14 @@ export const ANNOUNCEMENT_TYPES: Record<string, { label: string; color: string }
   weather: { label: "Weather Alert", color: "#3b82f6" },
   general: { label: "General", color: "#6b7280" },
   report_cleared: { label: "Report Cleared", color: "#22c55e" },
+};
+
+export const COLLECTOR_ISSUE_TYPES: Record<CollectorIssueType, { label: string; color: string }> = {
+  road_blockage: { label: "Road Blockage", color: "#ef4444" },
+  no_access: { label: "No Access", color: "#f59e0b" },
+  missed_stop: { label: "Missed Stop", color: "#3b82f6" },
+  unsafe_area: { label: "Unsafe Area", color: "#dc2626" },
+  other: { label: "Other", color: "#6b7280" },
 };
 
 export const MOCK_ANNOUNCEMENTS: Announcement[] = [
