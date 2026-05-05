@@ -12,6 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
 import { Header, Card, Button, Input, Dropdown, SideMenu } from "@/components/ui";
 import { useAppStore, useAuthStore } from "@/lib/store";
 import { api } from "@/lib/api";
@@ -164,17 +165,35 @@ export default function ReportScreen(): JSX.Element {
 
   const handleLocationGet = async () => {
     setIsLocating(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setLocation({ latitude: 8.9475, longitude: 125.5432 });
-    setIsLocating(false);
+    
+    try {
+      const permission = await Location.requestForegroundPermissionsAsync();
+      
+      if (!permission.granted) {
+        Alert.alert("Permission Required", "Location permission is needed to tag your report location.");
+        return;
+      }
+      
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.High,
+      });
+      
+      setLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+    } catch (error) {
+      console.error('[Report] Location error:', error);
+      Alert.alert("Error", "Unable to get location. Please try again.");
+    } finally {
+      setIsLocating(false);
+    }
   };
 
   const handleSubmit = async () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
-    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     try {
       if (!user?.id) {
